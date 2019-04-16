@@ -1,0 +1,14 @@
+{
+  "name": "inertia-react",
+  "version": "0.1.0",
+  "description": "The React adapter for Inertia.js",
+  "main": "src/index.js",
+  "author": "Jonathan Reinink",
+  "license": "MIT",
+  "dependencies": {
+    "inertia": "inertiajs/inertia"
+  },
+  "devDependencies": {
+    "eslint": "^5.15.3"
+  }
+}
