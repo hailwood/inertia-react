@@ -7,7 +7,7 @@ export default function InertiaLink({
   replace = false,
   preserveScroll = false,
   children,
-  ...props,
+  ...props
 }) {
   function visit(event) {
     if (shouldIntercept(event)) {
