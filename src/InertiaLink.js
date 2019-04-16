@@ -7,6 +7,7 @@ export default function InertiaLink({
   replace = false,
   preserveScroll = false,
   children,
+  ...props,
 }) {
   function visit(event) {
     if (shouldIntercept(event)) {
@@ -19,5 +20,5 @@ export default function InertiaLink({
     }
   }
 
-  return createElement('a', { href, onClick: visit }, children)
+  return createElement('a', { ...props, href, onClick: visit }, children)
 }
