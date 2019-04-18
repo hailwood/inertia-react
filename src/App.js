@@ -15,10 +15,10 @@ class App extends Component {
   }
 
   componentDidMount() {
-    Inertia.init(this.props.component, this.props.props, (component, props) => {
-      return Promise.resolve(this.props.resolveComponent(component)).then(instance => {
+    Inertia.init(this.props.initialPage, page => {
+      return Promise.resolve(this.props.resolveComponent(page.component)).then(instance => {
         this.setState({
-          page: { instance, props },
+          page: { instance, props: page.props },
         })
       })
     })
