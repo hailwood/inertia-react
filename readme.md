@@ -7,7 +7,7 @@
 Install using NPM:
 
 ~~~sh
-npm install inertiajs/inertia-react
+npm install inertiajs/inertia-react --save
 ~~~
 
 ## Create root template
