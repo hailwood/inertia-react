@@ -1,47 +1,28 @@
 import Inertia from 'inertia'
-import { Component, createElement } from 'react'
+import { createElement, useEffect, useState } from 'react'
 import PageContext from './PageContext'
 
-class App extends Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      page: {
-        instance: null,
-        props: null,
-      },
-    }
-  }
-
-  componentDidMount() {
-    Inertia.init(this.props.initialPage, page => {
-      return Promise.resolve(this.props.resolveComponent(page.component)).then(instance => {
-        this.setState({
-          page: { instance, props: page.props },
-        })
+export default ({ initialPage, resolveComponent }) => {
+  const [page, setPage] = useState({ instance: null, props: null })
+  useEffect(() => {
+    Inertia.init(initialPage, page =>
+      Promise.resolve(resolveComponent(page.component)).then(instance => {
+        setPage({ instance, props: page.props })
       })
-    })
-  }
-
-  render() {
-    if (!this.state.page.instance) {
-      return null
-    }
-
-    const Component = this.state.page.instance
-
-    return createElement(
-      PageContext.Provider,
-      { value: this.state.page },
-      createElement(
-        Component,
-        { key: window.location.pathname, ...this.state.page.props }
-      )
     )
+  }, [])
+
+  if (!page.instance) {
+    return null
   }
+
+  const Component = page.instance
+  return createElement(
+    PageContext.Provider,
+    { value: page },
+    createElement(Component, {
+      key: window.location.pathname,
+      ...page.props,
+    })
+  )
 }
-
-App.displayName = 'Inertia'
-
-export default App
