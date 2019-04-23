@@ -7,12 +7,12 @@
 Install using NPM:
 
 ~~~sh
-npm install inertiajs/inertia-react --save
+npm install inertiajs/inertia-react
 ~~~
 
 ## Create root template
 
-The first step to using Inertia.js is creating a root template. This template should include your assets, as well as a single `div` with two data attributes: `component` and `props`. This `div` is the root element that we'll use to boot React in. Here's an example:
+The first step to using Inertia.js is creating a root template. This template should include your assets, as well as a single `div` with a `data-page` attribute. This `div` is the root element that we'll use to boot React in, and the `data-page` attribute will the initial page information. Here's a PHP example:
 
 ~~~php
 <!DOCTYPE html>
@@ -25,11 +25,17 @@ The first step to using Inertia.js is creating a root template. This template sh
 </head>
 <body>
 
-<div id="app" data-component="{{ $component }}" data-props="{{ json_encode((object) $props) }}"></div>
+<div id="app" data-page="{{ json_encode($page) }}"></div>
 
 </body>
 </html>
 ~~~
+
+The `$page` object should contain three values:
+
+- `component`: The name of the Vue page component.
+- `props`: The page component data (props).
+- `version`: The current asset version (if you want to use automatic asset refreshing).
 
 ## Setting up Webpack
 
@@ -61,7 +67,7 @@ Next, create a `.babelrc` file in your project with the following:
 
 ~~~js
 {
-  "plugins": ["@babel/plugin-syntax-dynamic-import"]
+  plugins: ["@babel/plugin-syntax-dynamic-import"]
 }
 ~~~
 
@@ -74,25 +80,18 @@ import Inertia from 'inertia-react'
 import React from 'react'
 import { render } from 'react-dom'
 
-let app = document.getElementById('app')
+const app = document.getElementById('app')
 
 render(
   <Inertia
-    component={app.dataset.component}
-    props={JSON.parse(app.dataset.props)}
-    resolveComponent={(component) => {
-      return import(`@/Pages/${component}`).then(module => module.default)
-    }}
+    initialPage={JSON.parse(app.dataset.page)}
+    resolveComponent={component => import(`@/Pages/${component}`).then(module => module.default)}
   />,
   app
 )
 ~~~
 
-The base Inertia page component has three props:
-
-- `component`: The name of the first (current) page component.
-- `props`: The props (data) for the first (current) page component.
-- `resolveComponent`: A callback that tells Inertia how to load a page component. This callback must return a promise with a page instance.
+The `resolveComponent` is a callback that tells Inertia how to load a page component. This callback must return a promise with a page instance.
 
 ## Creating a base layout
 
@@ -101,20 +100,17 @@ While not required, for most projects it makes sense to create a default site la
 ~~~js
 import { InertiaLink } from 'inertia-react'
 
-export default function Layout() {
-  return (
-    <main>
-      <header>
-        <InertiaLink href="/">Home</InertiaLink>
-        <InertiaLink href="/about">About</InertiaLink>
-        <InertiaLink href="/contact">Contact</InertiaLink>
-      </header>
-      <article>
-        <slot />
-      </article>
-    </main>
-  )
-}
+export default ({ children }) => (
+  <main>
+    <header>
+      <InertiaLink href="/">Home</InertiaLink>
+      <InertiaLink href="/about">About</InertiaLink>
+      <InertiaLink href="/contact">Contact</InertiaLink>
+    </header>
+
+    <article>{children}</article>
+  </main>
+)
 ~~~
 
 ## Creating page components
@@ -124,63 +120,61 @@ With Inertia.js, each page in your application is a JavaScript component. Here's
 ~~~js
 import Layout from '@/Shared/Layout'
 
-export default function Welcome() {
-  return (
-    <Layout>
-      <h1>Welcome</h1>
-      <p>Welcome to my first Inertia.js app!</p>
-    </Layout>
-  )
-}
+export default () => (
+  <Layout>
+    <h1>Welcome</h1>
+    <p>Welcome to my first Inertia.js app!</p>
+  </Layout>
+)
 ~~~
 
 ## Creating links
 
-To create an Inertia link, use the `<InertiaLink>` component:
+To create an Inertia link, use the `<InertiaLink>` component.
 
 ~~~js
 import { InertiaLink } from 'inertia-react'
 
-export default function () {
-  return <InertiaLink href="/">Home</InertiaLink>
-}
+export default () => <InertiaLink href="/">Home</InertiaLink>
 ~~~
 
-You can also specify the browser history and scroll behaviour. By default all link clicks "push" a new history state, and reset the scroll position back to the top of the page. However, you can override these defaults using the `replace` and `preserve-scroll` attributes:
+You can also specify the browser history and scroll behaviour. By default all link clicks "push" a new history state, and reset the scroll position back to the top of the page. However, you can override these defaults using the `replace` and `preserve-scroll` attributes.
 
 ~~~js
 <InertiaLink replace preserve-scroll href="/">Home</InertiaLink>
 ~~~
 
-## Manually making Inertia visits
-
-In addition to clicking links, it's also very common to manually make Inertia visits. For example, after a successful login form submission, you may want to "redirect" to a different page. This can be done using the `Inertia.visit()` helper:
+You can also specify the method for the request. The default is `GET`, but you can also use `POST`, `PUT`, `PATCH`, and `DELETE`.
 
 ~~~js
-import { Inertia } from 'inertia-react'
-
-submit() {
-  axios.post('/login', this.form).then(response => {
-      Inertia.visit(response.data.intendedUrl)
-  })
-}
+<InertiaLink href="/logout" method="post">Logout</InertiaLink>
 ~~~
 
-And just like with an `<InertiaLink>`, you can also set the browser history and scroll behaviour:
+## Manually making visits
+
+In addition to clicking links, it's also very common to manually make Inertia visits. The following methods are available:
 
 ~~~js
-import { Inertia } from 'inertia-react'
+// Make a visit
+Inertia.visit(url, { method = 'get', data = {}, replace = false, preserveScroll = false })
 
-Inertia.visit(url, {
-  replace: true,
-  preserveScroll: true,
-})
+// Make a "replace" visit
+Inertia.replace(url, { method = 'get', data = {}, preserveScroll = false })
+
+// Make a "replace" visit to the current url
+Inertia.reload({ method = 'get', data = {}, preserveScroll = false })
+
+// Make a POST visit
+Inertia.post(url, data = {}, { replace = false, preserveScroll = false })
+
+// Make a PUT visit
+Inertia.put(url, data = {}, { replace = false, preserveScroll = false })
+
+// Make a PATCH visit
+Inertia.patch(url, data = {}, { replace = false, preserveScroll = false })
+
+// Make a DELETE visit
+Inertia.delete(url, { replace = false, preserveScroll = false })
 ~~~
 
-In fact, since "replace" is a more common action, you can even do this:
-
-~~~js
-import { Inertia } from 'inertia-react'
-
-Inertia.replace(url, { preserveScroll: true })
-~~~
+Just like with an `<InertiaLink>`, you can set the browser history and scroll behaviour using the `replace` and `preserveScroll` options.
