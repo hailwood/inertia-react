@@ -5,7 +5,7 @@ import PageContext from './PageContext'
 export default function App({ initialPage, resolveComponent }) {
   const [page, setPage] = useState({
     instance: null,
-    props: {}
+    props: {},
   })
 
   useEffect(() => {
@@ -28,4 +28,4 @@ export default function App({ initialPage, resolveComponent }) {
   )
 }
 
-App.displayName = 'Inertia';
+App.displayName = 'Inertia'
