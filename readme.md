@@ -65,9 +65,9 @@ npm install @babel/plugin-syntax-dynamic-import --save
 
 Next, create a `.babelrc` file in your project with the following:
 
-~~~js
+~~~json
 {
-  plugins: ["@babel/plugin-syntax-dynamic-import"]
+  "plugins": ["@babel/plugin-syntax-dynamic-import"]
 }
 ~~~
 
@@ -75,7 +75,7 @@ Next, create a `.babelrc` file in your project with the following:
 
 Next, update your main JavaScript file to boot your Inertia app. All we're doing here is initializing React with the base Inertia page component.
 
-~~~js
+~~~jsx harmony
 import Inertia from 'inertia-react'
 import React from 'react'
 import { render } from 'react-dom'
@@ -85,7 +85,7 @@ const app = document.getElementById('app')
 render(
   <Inertia
     initialPage={JSON.parse(app.dataset.page)}
-    resolveComponent={component => import(`@/Pages/${component}`).then(module => module.default)}
+    resolveComponent={name => import(`@/Pages/${name}`).then(module => module.default)}
   />,
   app
 )
@@ -97,56 +97,63 @@ The `resolveComponent` is a callback that tells Inertia how to load a page compo
 
 While not required, for most projects it makes sense to create a default site layout that your specific pages can extend. Save this to `/Shared/Layout.js`.
 
-~~~js
+~~~jsx harmony
 import { InertiaLink } from 'inertia-react'
+import React from 'react'
 
-export default ({ children }) => (
-  <main>
-    <header>
-      <InertiaLink href="/">Home</InertiaLink>
-      <InertiaLink href="/about">About</InertiaLink>
-      <InertiaLink href="/contact">Contact</InertiaLink>
-    </header>
+function Layout({ children }) {
+  return (
+    <main>
+      <header>
+        <InertiaLink href="/">Home</InertiaLink>
+        <InertiaLink href="/about">About</InertiaLink>
+        <InertiaLink href="/contact">Contact</InertiaLink>
+      </header>
 
-    <article>{children}</article>
-  </main>
-)
+      <article>{children}</article>
+    </main>
+  )
+}
 ~~~
 
 ## Creating page components
 
 With Inertia.js, each page in your application is a JavaScript component. Here's an example of a page component. Save this to `/Pages/Welcome.js`. Note how it extends the `Layout.js` component we created above.
 
-~~~js
+~~~jsx harmony
+import React from 'react'
 import Layout from '@/Shared/Layout'
 
-export default () => (
-  <Layout>
-    <h1>Welcome</h1>
-    <p>Welcome to my first Inertia.js app!</p>
-  </Layout>
-)
+function Welcome() {
+  return (
+    <Layout>
+      <h1>Welcome</h1>
+      <p>Welcome to my first Inertia.js app!</p>
+    </Layout>
+  )
+}
 ~~~
 
 ## Creating links
 
 To create an Inertia link, use the `<InertiaLink>` component.
 
-~~~js
+~~~jsx harmony
 import { InertiaLink } from 'inertia-react'
+import React from 'react'
 
 export default () => <InertiaLink href="/">Home</InertiaLink>
 ~~~
 
 You can also specify the browser history and scroll behaviour. By default all link clicks "push" a new history state, and reset the scroll position back to the top of the page. However, you can override these defaults using the `replace` and `preserve-scroll` attributes.
 
-~~~js
+~~~jsx harmony
 <InertiaLink replace preserve-scroll href="/">Home</InertiaLink>
 ~~~
 
 You can also specify the method for the request. The default is `GET`, but you can also use `POST`, `PUT`, `PATCH`, and `DELETE`.
 
-~~~js
+~~~jsx harmony
 <InertiaLink href="/logout" method="post">Logout</InertiaLink>
 ~~~
 
@@ -185,8 +192,9 @@ Sometimes it's necessary to access the page data (props) from a non-page compone
 
 The easiest way to access page props is with our `usePageProps` hook.
 
-~~~js
+~~~jsx harmony
 import { InertiaLink, usePageProps } from 'inertia-react'
+import React from 'react'
 
 function Layout({ children }) {
   const { auth } = usePageProps()
@@ -195,15 +203,15 @@ function Layout({ children }) {
     <main>
       <header>
         You are logged in as: {auth.user.name}
+
         <nav>
           <InertiaLink href="/">Home</InertiaLink>
           <InertiaLink href="/about">About</InertiaLink>
           <InertiaLink href="/contact">Contact</InertiaLink>
         </nav>
       </header>
-      <article>
-        {children}
-      </article>
+
+      <article>{children}</article>
     </main>
   )
 }
@@ -211,9 +219,9 @@ function Layout({ children }) {
 
 If you need to access the entire Inertia `page` object, you can directly access the `PageContext` object. Note that `usePageProps` should suffice for most use cases, so we don't recommend doing this unless you have a good reason!
 
-~~~js
-import { useContext } from 'react'
+~~~jsx harmony
 import { InertiaLink, PageContext } from 'inertia-react'
+import React, { useContext } from 'react'
 
 function Layout({ children }) {
   const { props } = useContext(PageContext)
@@ -222,15 +230,15 @@ function Layout({ children }) {
     <main>
       <header>
         You are logged in as: {props.auth.user.name}
+
         <nav>
           <InertiaLink href="/">Home</InertiaLink>
           <InertiaLink href="/about">About</InertiaLink>
           <InertiaLink href="/contact">Contact</InertiaLink>
         </nav>
       </header>
-      <article>
-        {children}
-      </article>
+
+      <article>{children}</article>
     </main>
   )
 }
