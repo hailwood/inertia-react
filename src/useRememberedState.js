@@ -1,7 +1,7 @@
 import Inertia from 'inertia';
 import { useState, useEffect } from 'react';
 
-export default function useRememberedState(initialState) {
+export default function useRememberedState(initialState, key) {
   const [state, setState] = useState(() => {
     const restored = Inertia.restore(key);
 
