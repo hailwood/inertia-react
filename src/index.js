@@ -1,6 +1,6 @@
 import Inertia from 'inertia'
 import App from './App'
-import InertiaLink from './InertiaLink'
+import InertiaLink from './Link'
 import PageContext from './PageContext'
 import usePageProps from './usePageProps'
 
