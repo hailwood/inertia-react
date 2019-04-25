@@ -227,7 +227,7 @@ When navigating browser history, Inertia reloads pages using prop data cached in
 
 To mitigate this issue, you can use the `useRememberedState` hook to tell Inertia.js which local component state to cache.
 
-~~~js
+~~~jsx harmony
 import { useRememberedState } from 'inertia-react'
 
 const [formState, setFormState] = useRememberedState({
@@ -239,7 +239,7 @@ const [formState, setFormState] = useRememberedState({
 
 If your page contains multiple components using the remember functionality, you'll need to provide a unique key for each component. For example, `Users/Create`. If you have multiple instances of the same component on the page, be sure to include a unique identifier for each of those instances. For example, `Users/Edit:{id}`.
 
-~~~js
+~~~jsx harmony
 import { useRememberedState } from 'inertia-react'
 
 const [formState, setFormState] = useRememberedState({
