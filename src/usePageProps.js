@@ -1,8 +1,7 @@
-import { useContext } from 'react'
-import PageContext from './PageContext'
+import usePage from './usePage'
 
 export default function usePageProps() {
-  const { props } = useContext(PageContext)
+  const { props } = usePage()
 
   return props
 }

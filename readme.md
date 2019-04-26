@@ -194,14 +194,14 @@ function Layout({ children }) {
 }
 ~~~
 
-If you need to access the entire Inertia `page` object, you can directly access the `PageContext` object. Note that `usePageProps` should suffice for most use cases, so we don't recommend doing this unless you have a good reason!
+If you need to access the entire Inertia `page` object, you can directly access it via the `usePage` hook. Note that `usePageProps` should suffice for most use cases, so we don't recommend doing this unless you have a good reason!
 
 ~~~jsx harmony
-import { InertiaLink, PageContext } from 'inertia-react'
-import React, { useContext } from 'react'
+import { InertiaLink, usePage } from 'inertia-react'
+import React from 'react'
 
 function Layout({ children }) {
-  const { props } = useContext(PageContext)
+  const { props } = usePage()
 
   return (
     <main>
