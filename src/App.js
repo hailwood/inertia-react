@@ -2,7 +2,11 @@ import Inertia from 'inertia'
 import { createElement, useEffect, useState } from 'react'
 import PageContext from './PageContext'
 
-export default function App({ initialPage, resolveComponent }) {
+export default function App({
+  initialPage,
+  resolveComponent,
+  children
+}) {
   const [page, setPage] = useState({
     instance: null,
     props: {},
@@ -16,15 +20,17 @@ export default function App({ initialPage, resolveComponent }) {
     )
   }, [initialPage, resolveComponent])
 
+  const pageContents = page.instance
+    ? createElement(page.instance, {
+          key: window.location.pathname,
+          ...page.props,
+      })
+    : null
+
   return createElement(
     PageContext.Provider,
     { value: page },
-    page.instance
-      ? createElement(page.instance, {
-        key: window.location.pathname,
-        ...page.props,
-      })
-      : null
+    children ? children(pageContents) : pageContents
   )
 }
 
