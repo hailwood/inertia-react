@@ -5,7 +5,7 @@ import PageContext from './PageContext'
 export default function App({
   initialPage,
   resolveComponent,
-  children
+  children,
 }) {
   const [page, setPage] = useState({
     instance: null,
@@ -22,9 +22,9 @@ export default function App({
 
   const pageContents = page.instance
     ? createElement(page.instance, {
-          key: window.location.pathname,
-          ...page.props,
-      })
+      key: window.location.pathname,
+      ...page.props,
+    })
     : null
 
   return createElement(
