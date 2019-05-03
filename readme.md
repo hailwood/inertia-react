@@ -78,7 +78,7 @@ While not required, for most projects it makes sense to create a default site la
 import { InertiaLink } from 'inertia-react'
 import React from 'react'
 
-function Layout({ children }) {
+export default function Layout({ children }) {
   return (
     <main>
       <header>
@@ -101,7 +101,7 @@ With Inertia.js, each page in your application is a JavaScript component. Here's
 import React from 'react'
 import Layout from '@/Shared/Layout'
 
-function Welcome() {
+export default function Welcome() {
   return (
     <Layout>
       <h1>Welcome</h1>
@@ -173,7 +173,7 @@ The easiest way to access page props is with our `usePageProps` hook.
 import { InertiaLink, usePageProps } from 'inertia-react'
 import React from 'react'
 
-function Layout({ children }) {
+export default function Layout({ children }) {
   const { auth } = usePageProps()
 
   return (
@@ -200,7 +200,7 @@ If you need to access the entire Inertia `page` object, you can directly access 
 import { InertiaLink, usePage } from 'inertia-react'
 import React from 'react'
 
-function Layout({ children }) {
+export default function Layout({ children }) {
   const { props } = usePage()
 
   return (
@@ -229,22 +229,32 @@ To mitigate this issue, you can use the `useRememberedState` hook to tell Inerti
 
 ~~~jsx harmony
 import { useRememberedState } from 'inertia-react'
+import React from 'react'
 
-const [formState, setFormState] = useRememberedState({
-  first_name: null,
-  last_name: null,
+export default function Profile() {
+  const [formState, setFormState] = useRememberedState({
+    first_name: null,
+    last_name: null,
+    // ...
+  })
+
   // ...
-})
+}
 ~~~
 
 If your page contains multiple components using the remember functionality, you'll need to provide a unique key for each component. For example, `Users/Create`. If you have multiple instances of the same component on the page, be sure to include a unique identifier for each of those instances. For example, `Users/Edit:{id}`.
 
 ~~~jsx harmony
 import { useRememberedState } from 'inertia-react'
+import React from 'react'
 
-const [formState, setFormState] = useRememberedState({
-  first_name: props.user.first_name,
-  last_name: props.user.last_name,
+export default function Profile() {
+  const [formState, setFormState] = useRememberedState({
+    first_name: props.user.first_name,
+    last_name: props.user.last_name,
+    // ...
+  }, `Users/Edit:${props.user.id}`)
+
   // ...
-}, `Users/Edit:${props.user.id}`)
+}
 ~~~
