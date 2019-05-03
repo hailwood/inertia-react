@@ -22,14 +22,17 @@ Here is an example Webpack configuration that uses [Laravel Mix](https://github.
 const mix = require('laravel-mix')
 const path = require('path')
 
-mix.react('resources/js/app.js', 'public/js').webpackConfig({
-  output: { chunkFilename: 'js/[name].[contenthash].js' },
-  resolve: {
-    alias: {
-      '@': path.resolve('resources/js'),
+mix
+  .react('resources/js/app.js', 'public/js')
+  .sass('resources/sass/app.scss', 'public/css')
+  .webpackConfig({
+    output: { chunkFilename: 'js/[name].[contenthash].js' },
+    resolve: {
+      alias: {
+        '@': path.resolve('resources/js'),
+      },
     },
-  },
-})
+  })
 ~~~
 
 ## Setup dynamic imports
