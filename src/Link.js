@@ -7,9 +7,14 @@ export default function InertiaLink({
   preserveScroll = false,
   replace = false,
   children,
+  onClick,
   ...props
 }) {
   const visit = useCallback(event => {
+    if (onClick) {
+      onClick(event)
+    }
+
     if (shouldIntercept(event)) {
       event.preventDefault()
 
@@ -19,7 +24,7 @@ export default function InertiaLink({
         replace,
       })
     }
-  }, [href, method, preserveScroll, replace])
+  }, [href, method, preserveScroll, replace, onClick])
 
   return createElement('a', { ...props, href, onClick: visit }, children)
 }
