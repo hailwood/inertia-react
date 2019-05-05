@@ -4,7 +4,7 @@ import React from 'react'
 type PageProps = {}
 
 type AppProps =  {
-  children?: React.ReactNode,
+  children?: (children: React.ReactNode) => React.ReactNode,
   initialPage: PageProps,
   resolveComponent: (name: string) => React.ReactNode,
 }
