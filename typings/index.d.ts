@@ -1,9 +1,11 @@
 import Inertia from 'inertia'
 import React from 'react'
 
+type PageProps = {}
+
 type AppProps =  {
   children?: React.ReactNode,
-  initialPage: object,
+  initialPage: PageProps,
   resolveComponent: (name: string) => React.ReactNode,
 }
 declare const App: React.FC<AppProps>
