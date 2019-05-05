@@ -1,16 +1,16 @@
 import Inertia from 'inertia'
 import React from 'react'
 
-type PageProps = {}
+interface PageProps {}
 
-type AppProps =  {
+interface AppProps {
   children?: (children: React.ReactNode) => React.ReactNode,
   initialPage: PageProps,
   resolveComponent: (name: string) => React.ReactNode,
 }
 declare const App: React.FC<AppProps>
 
-type InertiaLinkProps = {
+interface InertiaLinkProps {
   children?: React.ReactNode,
   href: string,
   method?: string,
