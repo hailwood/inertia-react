@@ -10,6 +10,7 @@
     "inertia": "inertiajs/inertia"
   },
   "devDependencies": {
+    "@types/react": "^16.8.0",
     "eslint": "^5.15.3",
     "eslint-plugin-react": "^7.12.4",
     "eslint-plugin-react-hooks": "^1.6.0",

@@ -1,23 +1,23 @@
 import Inertia from 'inertia'
-import React from 'react'
+import { FC, ReactNode } from 'react'
 
 interface PageProps {}
 
 interface AppProps {
-  children?: (children: React.ReactNode) => React.ReactNode,
+  children?: (children: ReactNode) => ReactNode,
   initialPage: PageProps,
-  resolveComponent: (name: string) => React.ReactNode,
+  resolveComponent: (name: string) => ReactNode,
 }
-declare const App: React.FC<AppProps>
+declare const App: FC<AppProps>
 
 interface InertiaLinkProps {
-  children?: React.ReactNode,
+  children?: ReactNode,
   href: string,
   method?: string,
   preserveScroll?: boolean,
   replace?: boolean,
 }
-declare const InertiaLink: React.FC<InertiaLinkProps>
+declare const InertiaLink: FC<InertiaLinkProps>
 
 export default App
 export { Inertia, InertiaLink }
