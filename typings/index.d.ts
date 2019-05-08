@@ -1,11 +1,9 @@
-import Inertia from 'inertia'
+import Inertia, { Page } from 'inertia'
 import { FC, ReactNode } from 'react'
-
-interface PageProps {}
 
 interface AppProps {
   children?: (children: ReactNode) => ReactNode,
-  initialPage: PageProps,
+  initialPage: Page,
   resolveComponent: (name: string) => ReactNode,
 }
 declare const App: FC<AppProps>
