@@ -21,8 +21,7 @@ export default function App({ initialPage, resolveComponent, children }) {
   }
 
   const renderChildren = children
-    ? children
-    : ({ Component, props, key }) => createElement(Component, { key, ...props })
+    || (({ Component, props, key }) => createElement(Component, { key, ...props }))
 
   return createElement(
     PageContext.Provider,
