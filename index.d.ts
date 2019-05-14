@@ -1,5 +1,5 @@
 import Inertia, { Page as InertiaPage } from 'inertia'
-import { FC, Key, ReactNode } from 'react'
+import { Dispatch, FC, Key, ReactNode, SetStateAction } from 'react'
 
 interface AppProps<PageProps = {}> {
   children?: ({ Component: ReactNode, key: Key, props: PageProps }) => ReactNode,
@@ -27,5 +27,10 @@ declare function usePage<PageProps = {}>(): Page<PageProps>
 
 declare function usePageProps<PageProps = {}>(): PageProps
 
+declare function useRememberedState<RememberedState>(
+  initialState: RememberedState,
+  key: string
+): [RememberedState, Dispatch<SetStateAction<RememberedState>>]
+
 export default App
-export { Inertia, InertiaLink, Page, usePage, usePageProps }
+export { Inertia, InertiaLink, Page, usePage, usePageProps, useRememberedState }
