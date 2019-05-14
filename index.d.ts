@@ -6,7 +6,7 @@ interface AppProps<PageProps = {}> {
   initialPage: InertiaPage
   resolveComponent: (name: string) => ReactNode
 }
-interface App<PageProps = {}> extends FC<AppProps<PageProps>> {}
+type App<PageProps = {}> = FC<AppProps<PageProps>>
 
 interface InertiaLinkProps {
   children?: ReactNode
@@ -16,7 +16,7 @@ interface InertiaLinkProps {
   preserveScroll?: boolean
   replace?: boolean
 }
-declare const InertiaLink: FC<InertiaLinkProps>
+type InertiaLink = FC<InertiaLinkProps>
 
 interface Page<PageProps = {}> {
   instance: ReactNode | null
