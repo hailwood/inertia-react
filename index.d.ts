@@ -1,12 +1,12 @@
-import Inertia, { Page } from 'inertia'
+import Inertia, { Page as InertiaPage } from 'inertia'
 import { FC, Key, ReactNode } from 'react'
 
 interface AppProps<PageProps = {}> {
   children?: ({ Component: ReactNode, key: Key, props: PageProps }) => ReactNode,
-  initialPage: Page,
+  initialPage: InertiaPage,
   resolveComponent: (name: string) => ReactNode,
 }
-declare interface App<PageProps = {}> extends FC<AppProps<PageProps>> {}
+interface App<PageProps = {}> extends FC<AppProps<PageProps>> {}
 
 interface InertiaLinkProps {
   children?: ReactNode,
@@ -18,5 +18,12 @@ interface InertiaLinkProps {
 }
 declare const InertiaLink: FC<InertiaLinkProps>
 
+interface Page<PageProps = {}> {
+  instance: ReactNode | null,
+  props: PageProps | {},
+}
+
+declare function usePage<PageProps = {}>(): Page<PageProps>
+
 export default App
-export { Inertia, InertiaLink }
+export { Inertia, InertiaLink, Page, usePage }
