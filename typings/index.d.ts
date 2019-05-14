@@ -12,6 +12,7 @@ interface InertiaLinkProps {
   children?: ReactNode,
   href: string,
   method?: string,
+  onClick?: () => void,
   preserveScroll?: boolean,
   replace?: boolean,
 }
