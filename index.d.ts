@@ -25,5 +25,7 @@ interface Page<PageProps = {}> {
 
 declare function usePage<PageProps = {}>(): Page<PageProps>
 
+declare function usePageProps<PageProps = {}>(): PageProps
+
 export default App
-export { Inertia, InertiaLink, Page, usePage }
+export { Inertia, InertiaLink, Page, usePage, usePageProps }
