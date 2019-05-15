@@ -3,7 +3,7 @@ import { Dispatch, FC, Key, ReactNode, SetStateAction } from 'react'
 
 interface AppProps<PageProps = {}> {
   children?: ({ Component: ReactNode, key: Key, props: PageProps }) => ReactNode
-  initialPage: InertiaPage
+  initialPage: InertiaPage<PageProps>
   resolveComponent: (name: string) => ReactNode
 }
 type App<PageProps = {}> = FC<AppProps<PageProps>>
