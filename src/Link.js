@@ -2,14 +2,15 @@ import Inertia, { shouldIntercept } from 'inertia'
 import { createElement, useCallback } from 'react'
 
 const noop = () => undefined
+
 export default function InertiaLink({
+  children,
+  data = {},
   href,
   method = 'get',
+  onClick = noop,
   preserveScroll = false,
   replace = false,
-  data = {},
-  children,
-  onClick = noop,
   ...props
 }) {
   return createElement('a', {
@@ -22,12 +23,12 @@ export default function InertiaLink({
         event.preventDefault()
 
         Inertia.visit(href, {
+          data,
           method,
           preserveScroll,
           replace,
-          data,
         })
       }
-    }, [onClick, href, method, preserveScroll, replace, data]),
+    }, [data, href, method, onClick, preserveScroll, replace]),
   }, children)
 }

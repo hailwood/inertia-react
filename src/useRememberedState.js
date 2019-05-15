@@ -5,9 +5,7 @@ export default function useRememberedState(initialState, key) {
   const [state, setState] = useState(() => {
     const restored = Inertia.restore(key)
 
-    return restored !== undefined
-      ? restored
-      : initialState
+    return restored !== undefined ? restored : initialState
   })
 
   useEffect(() => {
