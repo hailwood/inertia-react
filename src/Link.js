@@ -6,6 +6,7 @@ export default function InertiaLink({
   method = 'get',
   preserveScroll = false,
   replace = false,
+  data = null,
   children,
   onClick,
   ...props
@@ -22,9 +23,10 @@ export default function InertiaLink({
         method,
         preserveScroll,
         replace,
+        data,
       })
     }
-  }, [href, method, preserveScroll, replace, onClick])
+  }, [onClick, href, method, preserveScroll, replace, data])
 
   return createElement('a', { ...props, href, onClick: visit }, children)
 }
