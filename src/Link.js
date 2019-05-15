@@ -6,7 +6,7 @@ export default function InertiaLink({
   method = 'get',
   preserveScroll = false,
   replace = false,
-  data = null,
+  data = {},
   children,
   onClick,
   ...props
