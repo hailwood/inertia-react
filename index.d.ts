@@ -1,5 +1,5 @@
 import Inertia, { Page as InertiaPage } from 'inertia'
-import { Dispatch, FC, Key, ReactNode, SetStateAction } from 'react'
+import { Dispatch, FC, Key, MouseEvent, ReactNode, SetStateAction } from 'react'
 
 interface AppProps<PageProps = {}> {
   children?: ({ Component: ReactNode, key: Key, props: PageProps }) => ReactNode
@@ -12,7 +12,7 @@ interface InertiaLinkProps {
   children?: ReactNode
   href: string
   method?: string
-  onClick?: () => void
+  onClick?: (event: MouseEvent<HTMLAnchorElement>) => void
   preserveScroll?: boolean
   replace?: boolean
 }
