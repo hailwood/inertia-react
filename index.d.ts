@@ -10,6 +10,7 @@ type App<PageProps = {}> = FC<AppProps<PageProps>>
 
 interface InertiaLinkProps {
   children?: ReactNode
+  data?: object
   href: string
   method?: string
   onClick?: (event: MouseEvent<HTMLAnchorElement>) => void
