@@ -1,6 +1,7 @@
 import Inertia, { shouldIntercept } from 'inertia'
 import { createElement, useCallback } from 'react'
 
+const noop = () => undefined
 export default function InertiaLink({
   href,
   method = 'get',
@@ -8,13 +9,11 @@ export default function InertiaLink({
   replace = false,
   data = {},
   children,
-  onClick,
+  onClick = noop,
   ...props
 }) {
   const visit = useCallback(event => {
-    if (onClick) {
-      onClick(event)
-    }
+    onClick(event)
 
     if (shouldIntercept(event)) {
       event.preventDefault()
