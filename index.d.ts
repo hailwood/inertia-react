@@ -41,6 +41,7 @@ type InertiaLink = FC<InertiaLinkProps>
 
 interface Page<TransformedProps = {}> {
   component: ReactNode | null
+  key: number | null
   props: TransformedProps | {}
 }
 
