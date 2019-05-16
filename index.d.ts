@@ -12,7 +12,7 @@ import {
 interface AppProps<PageProps = {}> {
   children?: ({ Component: ReactNode, key: Key, props: PageProps }) => ReactNode
   initialPage: InertiaPage<PageProps>
-  resolveComponent: (name: string) => ReactNode
+  resolveComponent: (name: string) => Promise<ReactNode>
 }
 type App<PageProps = {}> = FC<AppProps<PageProps>>
 
