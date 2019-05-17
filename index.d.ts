@@ -3,7 +3,7 @@ declare namespace InertiaReact {
     PagePropsBeforeTransform extends Inertia.PagePropsBeforeTransform = {},
     PageProps extends Inertia.PageProps = {}
   > = React.FC<{
-    children?: (props: { Component: React.ReactComponentElement, key: React.Key, props: PageProps }) => React.ReactNode
+    children?: (props: { Component: React.ReactNode, key: React.Key, props: PageProps }) => React.ReactNode
     initialPage: Inertia.Page<PageProps>
     resolveComponent: (name: string) => Promise<React.ReactNode>
     transformProps?: (props: PagePropsBeforeTransform) => PageProps
