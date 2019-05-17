@@ -3,24 +3,30 @@ declare namespace InertiaReact {
     PagePropsBeforeTransform extends Inertia.PagePropsBeforeTransform = {},
     PageProps extends Inertia.PageProps = {}
   > = React.FC<{
-    children?: (props: { Component: React.ReactNode, key: React.Key, props: PageProps }) => React.ReactNode
+    children?: (props: {
+      Component: React.ReactNode
+      key: React.Key
+      props: PageProps
+    }) => React.ReactNode
     initialPage: Inertia.Page<PageProps>
     resolveComponent: (name: string) => Promise<React.ReactNode>
     transformProps?: (props: PagePropsBeforeTransform) => PageProps
   }>
 
   interface InertiaLinkProps {
+    className?: string
     children?: React.ReactNode
     data?: object
     href: string
     method?: string
     onClick?: (
-      event: React.MouseEvent<HTMLAnchorElement> | React.KeyboardEvent<HTMLAnchorElement>
+      event:
+        | React.MouseEvent<HTMLAnchorElement>
+        | React.KeyboardEvent<HTMLAnchorElement>
     ) => void
     preserveScroll?: boolean
     preserveState?: boolean
     replace?: boolean
-    className?: string
     style?: React.CSSProperties
   }
 
