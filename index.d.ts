@@ -1,59 +1,51 @@
-import Inertia, {
-  Page as InertiaPage,
-  PageProps as InertiaPageProps,
-} from 'inertia'
-import {
-  Dispatch,
-  FC,
-  Key,
-  MouseEvent,
-  KeyboardEvent,
-  ReactNode,
-  SetStateAction,
-} from 'react'
+declare namespace InertiaReact {
+  type App<
+    PagePropsBeforeTransform extends Inertia.PagePropsBeforeTransform = {},
+    PageProps extends Inertia.PageProps = {}
+  > = React.FC<{
+    children?: (props: { Component: React.ReactComponentElement, key: React.Key, props: PageProps }) => React.ReactNode
+    initialPage: Inertia.Page<PageProps>
+    resolveComponent: (name: string) => Promise<React.ReactNode>
+    transformProps?: (props: PagePropsBeforeTransform) => PageProps
+  }>
 
-interface AppProps<
-  PageProps extends InertiaPageProps = {},
-  TransformedProps = PageProps
-> {
-  children?: ({ Component: ReactNode, key: Key, props: PageProps }) => ReactNode
-  initialPage: InertiaPage<PageProps>
-  resolveComponent: (name: string) => Promise<ReactNode>
-  transformProps?: (props: PageProps) => TransformedProps
-}
-type App<
-  PageProps extends InertiaPageProps = {},
-  TransformedProps = PageProps
-> = FC<AppProps<PageProps, TransformedProps>>
-
-interface InertiaLinkProps {
-  children?: ReactNode
-  data?: object
-  href: string
-  method?: string
-  onClick?: (
-    event: MouseEvent<HTMLAnchorElement> | KeyboardEvent<HTMLAnchorElement>
-  ) => void
-  preserveScroll?: boolean
-  preserveState?: boolean
-  replace?: boolean
-}
-type InertiaLink = FC<InertiaLinkProps>
-
-interface Page<TransformedProps = {}> {
-  component: ReactNode | null
-  key: number | null
-  props: TransformedProps | {}
+  interface InertiaLinkProps {
+    children?: React.ReactNode
+    data?: object
+    href: string
+    method?: string
+    onClick?: (
+      event: React.MouseEvent<HTMLAnchorElement> | React.KeyboardEvent<HTMLAnchorElement>
+    ) => void
+    preserveScroll?: boolean
+    preserveState?: boolean
+    replace?: boolean
+    className?: string
+    style?: React.CSSProperties
+  }
+  
+  type InertiaLink = React.FC<InertiaLinkProps>
 }
 
-declare function usePage<TransformedProps = {}>(): Page<TransformedProps>
+declare module 'inertia-react' {
+  export function usePage(): {
+    component: React.ReactNode | null
+    key: number | null
+    props: Inertia.PageProps
+  }
+  
+  export function usePageProps(): Inertia.PageProps
+  
+  export function useRememberedState<RememberedState>(
+    initialState: RememberedState,
+    key: string
+  ): [RememberedState, React.Dispatch<React.SetStateAction<RememberedState>>]
+  
+  export const Inertia: Inertia.Inertia
 
-declare function usePageProps<TransformedProps = {}>(): TransformedProps
+  export const InertiaLink: InertiaReact.InertiaLink
 
-declare function useRememberedState<RememberedState>(
-  initialState: RememberedState,
-  key: string
-): [RememberedState, Dispatch<SetStateAction<RememberedState>>]
-
-export default App
-export { Inertia, InertiaLink, Page, usePage, usePageProps, useRememberedState }
+  const _default: InertiaReact.App
+  
+  export default _default
+}
