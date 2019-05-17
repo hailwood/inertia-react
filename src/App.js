@@ -6,7 +6,7 @@ export default function App({
   children,
   initialPage,
   resolveComponent,
-  transformProps = props => props,
+  transformProps,
 }) {
   const [page, setPage] = useState({
     component: null,
@@ -19,14 +19,14 @@ export default function App({
       initialPage,
       resolveComponent,
       updatePage: (component, props, { preserveState }) => {
-        setPage({
+        setPage(page => ({
           component,
           key: preserveState ? page.key : Date.now(),
-          props: transformProps(props),
-        })
+          props: transformProps ? transformProps(props) : props,
+        }))
       },
     })
-  }, [initialPage, page.key, resolveComponent, transformProps])
+  }, [initialPage, resolveComponent, transformProps])
 
   if (!page.component) {
     return createElement(PageContext.Provider, { value: page }, null)
