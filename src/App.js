@@ -2,7 +2,12 @@ import Inertia from 'inertia'
 import { createElement, useEffect, useState } from 'react'
 import PageContext from './PageContext'
 
-export default function App({ initialPage, resolveComponent, children }) {
+export default function App({
+  children,
+  initialPage,
+  resolveComponent,
+  transformProps = props => props,
+}) {
   const [page, setPage] = useState({
     component: null,
     props: {},
@@ -13,7 +18,10 @@ export default function App({ initialPage, resolveComponent, children }) {
       initialPage,
       resolveComponent,
       updatePage: (component, props) => {
-        setPage({ component, props })
+        setPage({ 
+          component, 
+          props: transformProps(props)
+        })
       },
     })
   }, [initialPage, resolveComponent])
