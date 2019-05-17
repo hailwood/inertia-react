@@ -10,6 +10,7 @@ export default function App({
 }) {
   const [page, setPage] = useState({
     component: null,
+    key: null,
     props: {},
   })
 
@@ -17,14 +18,15 @@ export default function App({
     Inertia.init({
       initialPage,
       resolveComponent,
-      updatePage: (component, props) => {
+      updatePage: (component, props, { preserveState }) => {
         setPage({
           component,
+          key: preserveState ? page.key : Date.now(),
           props: transformProps(props),
         })
       },
     })
-  }, [initialPage, resolveComponent, transformProps])
+  }, [initialPage, page.key, resolveComponent, transformProps])
 
   if (!page.component) {
     return createElement(PageContext.Provider, { value: page }, null)
@@ -36,7 +38,7 @@ export default function App({
   return createElement(
     PageContext.Provider,
     { value: page },
-    renderChildren({ Component: page.component, key: window.location.pathname, props: page.props })
+    renderChildren({ Component: page.component, key: page.key, props: page.props })
   )
 }
 

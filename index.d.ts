@@ -35,12 +35,14 @@ interface InertiaLinkProps {
     event: MouseEvent<HTMLAnchorElement> | KeyboardEvent<HTMLAnchorElement>
   ) => void
   preserveScroll?: boolean
+  preserveState?: boolean
   replace?: boolean
 }
 type InertiaLink = FC<InertiaLinkProps>
 
 interface Page<TransformedProps = {}> {
   component: ReactNode | null
+  key: number | null
   props: TransformedProps | {}
 }
 
