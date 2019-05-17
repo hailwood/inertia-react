@@ -35,6 +35,7 @@ interface InertiaLinkProps {
     event: MouseEvent<HTMLAnchorElement> | KeyboardEvent<HTMLAnchorElement>
   ) => void
   preserveScroll?: boolean
+  preserveState?: boolean
   replace?: boolean
 }
 type InertiaLink = FC<InertiaLinkProps>
