@@ -145,32 +145,32 @@ You can add data using the `data` attribute:
 
 ## Manually making visits
 
-In addition to clicking links, it's also very common to manually make Inertia visits. The following methods are available:
+In addition to clicking links, it's also very common to manually make Inertia visits. The following methods are available. Take not of the defaults.
 
 ~~~js
 // Make a visit
-Inertia.visit(url, { method = 'get', data = {}, replace = false, preserveScroll = false })
+Inertia.visit(url, { method: 'get', data: {}, replace: false, preserveScroll: false })
 
 // Make a "replace" visit
-Inertia.replace(url, { method = 'get', data = {}, preserveScroll = false })
+Inertia.replace(url, { method: 'get', data: {}, preserveScroll: false })
 
 // Make a "replace" visit to the current url
-Inertia.reload({ method = 'get', data = {}, preserveScroll = false })
+Inertia.reload({ method: 'get', data: {}, preserveScroll: false })
 
 // Make a POST visit
-Inertia.post(url, data = {}, { replace = false, preserveScroll = false })
+Inertia.post(url, data, { replace: false, preserveScroll: false })
 
 // Make a PUT visit
-Inertia.put(url, data = {}, { replace = false, preserveScroll = false })
+Inertia.put(url, data, { replace: false, preserveScroll: false })
 
 // Make a PATCH visit
-Inertia.patch(url, data = {}, { replace = false, preserveScroll = false })
+Inertia.patch(url, data, { replace: false, preserveScroll: false })
 
 // Make a DELETE visit
-Inertia.delete(url, { replace = false, preserveScroll = false })
+Inertia.delete(url, { replace: false, preserveScroll: false })
 ~~~
 
-Just like with an `<InertiaLink>`, you can set the browser history and scroll behaviour using the `replace` and `preserveScroll` options.
+Just like with an `<InertiaLink>`, you can control the history control behaviour using `replace`, and scroll behaviour using `preserveScroll`.
 
 ## Accessing page data in other components
 
