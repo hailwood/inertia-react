@@ -30,7 +30,7 @@ interface InertiaLinkProps {
 type InertiaLink = FC<InertiaLinkProps>
 
 interface Page<PageProps = {}> {
-  instance: ReactNode | null
+  component: ReactNode | null
   props: PageProps | {}
 }
 
