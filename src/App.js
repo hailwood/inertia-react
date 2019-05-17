@@ -4,19 +4,21 @@ import PageContext from './PageContext'
 
 export default function App({ initialPage, resolveComponent, children }) {
   const [page, setPage] = useState({
-    instance: null,
+    component: null,
     props: {},
   })
 
   useEffect(() => {
-    Inertia.init(initialPage, page =>
-      Promise.resolve(resolveComponent(page.component)).then(instance => {
-        setPage({ instance, props: page.props })
-      })
-    )
+    Inertia.init({
+      initialPage,
+      resolveComponent,
+      updatePage: (component, props) => {
+        setPage({ component, props })
+      },
+    })
   }, [initialPage, resolveComponent])
 
-  if (!page.instance) {
+  if (!page.component) {
     return createElement(PageContext.Provider, { value: page }, null)
   }
 
@@ -26,7 +28,7 @@ export default function App({ initialPage, resolveComponent, children }) {
   return createElement(
     PageContext.Provider,
     { value: page },
-    renderChildren({ Component: page.instance, key: window.location.pathname, props: page.props })
+    renderChildren({ Component: page.component, key: window.location.pathname, props: page.props })
   )
 }
 
