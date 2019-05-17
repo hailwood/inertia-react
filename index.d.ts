@@ -23,7 +23,7 @@ declare namespace InertiaReact {
     className?: string
     style?: React.CSSProperties
   }
-  
+
   type InertiaLink = React.FC<InertiaLinkProps>
 }
 
@@ -33,19 +33,19 @@ declare module 'inertia-react' {
     key: number | null
     props: Inertia.PageProps
   }
-  
+
   export function usePageProps(): Inertia.PageProps
-  
+
   export function useRememberedState<RememberedState>(
     initialState: RememberedState,
     key: string
   ): [RememberedState, React.Dispatch<React.SetStateAction<RememberedState>>]
-  
+
   export const Inertia: Inertia.Inertia
 
   export const InertiaLink: InertiaReact.InertiaLink
 
   const _default: InertiaReact.App
-  
+
   export default _default
 }
