@@ -2,11 +2,13 @@ import Inertia from 'inertia'
 import { createElement, useEffect, useState } from 'react'
 import PageContext from './PageContext'
 
+const identity = i => i
+
 export default function App({
   children,
   initialPage,
   resolveComponent,
-  transformProps,
+  transformProps = identity,
 }) {
   const [page, setPage] = useState({
     component: null,
@@ -22,7 +24,7 @@ export default function App({
         setPage(page => ({
           component,
           key: preserveState ? page.key : Date.now(),
-          props: transformProps ? transformProps(props) : props,
+          props: transformProps(props),
         }))
       },
     })
