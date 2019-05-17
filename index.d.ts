@@ -1,4 +1,7 @@
-import Inertia, { Page as InertiaPage } from 'inertia'
+import Inertia, {
+  Page as InertiaPage,
+  PageProps as InertiaPageProps,
+} from 'inertia'
 import {
   Dispatch,
   FC,
@@ -9,15 +12,19 @@ import {
   SetStateAction,
 } from 'react'
 
-interface AppProps<PageProps = {}, TransformedProps = PageProps> {
+interface AppProps<
+  PageProps extends InertiaPageProps = {},
+  TransformedProps = PageProps
+> {
   children?: ({ Component: ReactNode, key: Key, props: PageProps }) => ReactNode
   initialPage: InertiaPage<PageProps>
   resolveComponent: (name: string) => Promise<ReactNode>
   transformProps?: (props: PageProps) => TransformedProps
 }
-type App<PageProps = {}, TransformedProps = PageProps> = FC<
-  AppProps<PageProps, TransformedProps>
->
+type App<
+  PageProps extends InertiaPageProps = {},
+  TransformedProps = PageProps
+> = FC<AppProps<PageProps, TransformedProps>>
 
 interface InertiaLinkProps {
   children?: ReactNode
