@@ -18,13 +18,13 @@ export default function App({
       initialPage,
       resolveComponent,
       updatePage: (component, props) => {
-        setPage({ 
-          component, 
-          props: transformProps(props)
+        setPage({
+          component,
+          props: transformProps(props),
         })
       },
     })
-  }, [initialPage, resolveComponent])
+  }, [initialPage, resolveComponent, transformProps])
 
   if (!page.component) {
     return createElement(PageContext.Provider, { value: page }, null)
