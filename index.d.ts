@@ -9,12 +9,15 @@ import {
   SetStateAction,
 } from 'react'
 
-interface AppProps<PageProps = {}> {
+interface AppProps<PageProps = {}, TransformedProps = PageProps> {
   children?: ({ Component: ReactNode, key: Key, props: PageProps }) => ReactNode
   initialPage: InertiaPage<PageProps>
   resolveComponent: (name: string) => Promise<ReactNode>
+  transformProps?: (props: PageProps) => TransformedProps
 }
-type App<PageProps = {}> = FC<AppProps<PageProps>>
+type App<PageProps = {}, TransformedProps = PageProps> = FC<
+  AppProps<PageProps, TransformedProps>
+>
 
 interface InertiaLinkProps {
   children?: ReactNode
@@ -29,14 +32,14 @@ interface InertiaLinkProps {
 }
 type InertiaLink = FC<InertiaLinkProps>
 
-interface Page<PageProps = {}> {
+interface Page<TransformedProps = {}> {
   component: ReactNode | null
-  props: PageProps | {}
+  props: TransformedProps | {}
 }
 
-declare function usePage<PageProps = {}>(): Page<PageProps>
+declare function usePage<TransformedProps = {}>(): Page<TransformedProps>
 
-declare function usePageProps<PageProps = {}>(): PageProps
+declare function usePageProps<TransformedProps = {}>(): TransformedProps
 
 declare function useRememberedState<RememberedState>(
   initialState: RememberedState,
