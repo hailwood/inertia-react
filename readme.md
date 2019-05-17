@@ -145,7 +145,7 @@ You can add data using the `data` attribute:
 
 ## Manually making visits
 
-In addition to clicking links, it's also very common to manually make Inertia visits. The following methods are available. Take not of the defaults.
+In addition to clicking links, it's also very common to manually make Inertia visits. The following methods are available. Take note of the defaults.
 
 ~~~js
 // Make a visit
