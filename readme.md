@@ -137,6 +137,12 @@ You can also specify the method for the request. The default is `GET`, but you c
 <InertiaLink href="/logout" method="post">Logout</InertiaLink>
 ~~~
 
+You can add data using the `data` attribute:
+
+~~~jsx harmony
+<InertiaLink href="/endpoint" method="post" data={{ foo: bar}}>Save</InertiaLink>
+~~~
+
 ## Manually making visits
 
 In addition to clicking links, it's also very common to manually make Inertia visits. The following methods are available:
