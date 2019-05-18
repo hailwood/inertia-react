@@ -4,12 +4,12 @@ declare namespace InertiaReact {
     PageProps extends Inertia.PageProps = {}
   > = React.FC<{
     children?: (props: {
-      Component: React.ReactNode
+      Component: React.ComponentType
       key: React.Key
       props: PageProps
     }) => React.ReactNode
     initialPage: Inertia.Page<PageProps>
-    resolveComponent: (name: string) => Promise<React.ReactNode>
+    resolveComponent: (name: string) => Promise<React.ComponentType>
     transformProps?: (props: PagePropsBeforeTransform) => PageProps
   }>
 
@@ -37,7 +37,7 @@ declare module 'inertia-react' {
   export function usePage<
     PageProps extends Inertia.PageProps = Inertia.PageProps
   >(): {
-    component: React.ReactNode | null
+    component: React.ComponentType | null
     key: number | null
     props: PageProps
   }
