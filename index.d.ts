@@ -9,7 +9,9 @@ declare namespace InertiaReact {
       props: PageProps
     }) => React.ReactNode
     initialPage: Inertia.Page<PageProps>
-    resolveComponent: (name: string) => Promise<React.ComponentType>
+    resolveComponent: (
+      name: string
+    ) => React.ComponentType | Promise<React.ComponentType>
     transformProps?: (props: PagePropsBeforeTransform) => PageProps
   }>
 
