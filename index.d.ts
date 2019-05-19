@@ -1,7 +1,7 @@
 declare namespace InertiaReact {
   type App<
-    PagePropsBeforeTransform extends Inertia.PagePropsBeforeTransform = {},
-    PageProps extends Inertia.PageProps = {}
+    PagePropsBeforeTransform extends Inertia.PagePropsBeforeTransform = Inertia.PagePropsBeforeTransform,
+    PageProps extends Inertia.PageProps = Inertia.PageProps
   > = React.FC<{
     children?: (props: {
       Component: React.ComponentType
