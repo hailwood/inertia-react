@@ -3,24 +3,30 @@ declare namespace InertiaReact {
     PagePropsBeforeTransform extends Inertia.PagePropsBeforeTransform = {},
     PageProps extends Inertia.PageProps = {}
   > = React.FC<{
-    children?: (props: { Component: React.ReactComponentElement, key: React.Key, props: PageProps }) => React.ReactNode
+    children?: (props: {
+      Component: React.ComponentType
+      key: React.Key
+      props: PageProps
+    }) => React.ReactNode
     initialPage: Inertia.Page<PageProps>
-    resolveComponent: (name: string) => Promise<React.ReactNode>
+    resolveComponent: (name: string) => Promise<React.ComponentType>
     transformProps?: (props: PagePropsBeforeTransform) => PageProps
   }>
 
   interface InertiaLinkProps {
+    className?: string
     children?: React.ReactNode
     data?: object
     href: string
     method?: string
     onClick?: (
-      event: React.MouseEvent<HTMLAnchorElement> | React.KeyboardEvent<HTMLAnchorElement>
+      event:
+        | React.MouseEvent<HTMLAnchorElement>
+        | React.KeyboardEvent<HTMLAnchorElement>
     ) => void
     preserveScroll?: boolean
     preserveState?: boolean
     replace?: boolean
-    className?: string
     style?: React.CSSProperties
   }
 
@@ -28,13 +34,17 @@ declare namespace InertiaReact {
 }
 
 declare module 'inertia-react' {
-  export function usePage(): {
-    component: React.ReactNode | null
+  export function usePage<
+    PageProps extends Inertia.PageProps = Inertia.PageProps
+  >(): {
+    component: React.ComponentType | null
     key: number | null
-    props: Inertia.PageProps
+    props: PageProps
   }
 
-  export function usePageProps(): Inertia.PageProps
+  export function usePageProps<
+    PageProps extends Inertia.PageProps = Inertia.PageProps
+  >(): PageProps
 
   export function useRememberedState<RememberedState>(
     initialState: RememberedState,
