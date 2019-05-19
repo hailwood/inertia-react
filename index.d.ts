@@ -16,8 +16,8 @@ declare namespace InertiaReact {
   }>
 
   interface InertiaLinkProps {
-    className?: string
     children?: React.ReactNode
+    className?: string
     data?: object
     href: string
     method?: string
