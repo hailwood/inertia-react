@@ -111,12 +111,12 @@ import { render } from 'react-dom'
 
 const app = document.getElementById('app')
 
-const files = require.context('./', true, /\.vue$/i)
+const files = require.context('./', true, /\.jsx$/i)
 
 render(
   <Inertia
     initialPage={JSON.parse(app.dataset.page)}
-    resolveComponent={page => files(`./Pages/${page}.vue`).default}
+    resolveComponent={page => files(`./Pages/${page}.jsx`).default}
   />,
   app
 )
