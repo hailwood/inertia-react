@@ -1,7 +1,7 @@
 declare namespace InertiaReact {
   type App<
-    PagePropsBeforeTransform extends Inertia.PagePropsBeforeTransform = {},
-    PageProps extends Inertia.PageProps = {}
+    PagePropsBeforeTransform extends Inertia.PagePropsBeforeTransform = Inertia.PagePropsBeforeTransform,
+    PageProps extends Inertia.PageProps = Inertia.PageProps
   > = React.FC<{
     children?: (props: {
       Component: React.ComponentType
@@ -9,13 +9,15 @@ declare namespace InertiaReact {
       props: PageProps
     }) => React.ReactNode
     initialPage: Inertia.Page<PageProps>
-    resolveComponent: (name: string) => Promise<React.ComponentType>
+    resolveComponent: (
+      name: string
+    ) => React.ComponentType | Promise<React.ComponentType>
     transformProps?: (props: PagePropsBeforeTransform) => PageProps
   }>
 
   interface InertiaLinkProps {
-    className?: string
     children?: React.ReactNode
+    className?: string
     data?: object
     href: string
     method?: string
