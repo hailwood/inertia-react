@@ -119,12 +119,12 @@ import { render } from 'react-dom'
 
 const app = document.getElementById('app')
 
-const files = require.context('./', true, /\.jsx$/i)
+const files = require.context('./', true, /\.js$/i)
 
 render(
   <Inertia
     initialPage={JSON.parse(app.dataset.page)}
-    resolveComponent={page => files(`./Pages/${page}.jsx`).default}
+    resolveComponent={page => files(`./Pages/${page}.js`).default}
   />,
   app
 )
