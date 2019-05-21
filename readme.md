@@ -26,7 +26,7 @@ mix
   .react('resources/js/app.js', 'public/js')
   .sass('resources/sass/app.scss', 'public/css')
   .webpackConfig({
-    output: { chunkFilename: 'js/[name].[contenthash].js' },
+    output: { chunkFilename: 'js/[name].js?id=[chunkhash]' },
     resolve: {
       alias: {
         '@': path.resolve('resources/js'),
@@ -49,6 +49,14 @@ Next, create a `.babelrc` file in your project with the following:
 {
   "plugins": ["@babel/plugin-syntax-dynamic-import"]
 }
+~~~
+
+Alternatively, if you're using Laravel Mix, you can put this in your `webpack.mix.js` file:
+
+~~~js
+mix.babelConfig({
+  plugins: ['@babel/plugin-syntax-dynamic-import'],
+})
 ~~~
 
 ## Initializing React
@@ -111,12 +119,12 @@ import { render } from 'react-dom'
 
 const app = document.getElementById('app')
 
-const files = require.context('./', true, /\.jsx$/i)
+const files = require.context('./', true, /\.js$/i)
 
 render(
   <Inertia
     initialPage={JSON.parse(app.dataset.page)}
-    resolveComponent={page => files(`./Pages/${page}.jsx`).default}
+    resolveComponent={page => files(`./Pages/${page}.js`).default}
   />,
   app
 )
