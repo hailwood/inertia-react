@@ -50,7 +50,7 @@ declare module 'inertia-react' {
 
   export function useRememberedState<RememberedState>(
     initialState: RememberedState,
-    key: string
+    key?: string
   ): [RememberedState, React.Dispatch<React.SetStateAction<RememberedState>>]
 
   export const Inertia: Inertia.Inertia
