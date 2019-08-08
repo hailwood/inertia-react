@@ -38,14 +38,6 @@ declare namespace InertiaReact {
 declare module 'inertia-react' {
   export function usePage<
     PageProps extends Inertia.PageProps = Inertia.PageProps
-  >(): {
-    component: React.ComponentType | null
-    key: number | null
-    props: PageProps
-  }
-
-  export function usePageProps<
-    PageProps extends Inertia.PageProps = Inertia.PageProps
   >(): PageProps
 
   export function useRememberedState<RememberedState>(
