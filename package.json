@@ -1,22 +1,27 @@
 {
   "name": "inertia-react",
   "version": "0.1.0",
-  "description": "The React adapter for Inertia.js",
-  "main": "src/index.js",
-  "author": "Jonathan Reinink",
   "license": "MIT",
+  "description": "The React adapter for Inertia.js",
+  "author": "Jonathan Reinink",
+  "source": "src/index.js",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "unpkg": "dist/index.umd.js",
   "typings": "index.d.ts",
-  "dependencies": {
-    "inertia": "inertiajs/inertia"
+  "scripts": {
+    "build": "microbundle --name InertiaReact --globals react=React,inertia=Inertia"
   },
   "devDependencies": {
     "@types/react": "^16.8.0",
     "eslint": "^5.15.3",
     "eslint-plugin-react": "^7.12.4",
     "eslint-plugin-react-hooks": "^1.6.0",
+    "microbundle": "^0.11.0",
     "react": "^16.8.0"
   },
   "peerDependencies": {
+    "inertia": "inertiajs/inertia",
     "react": "^16.8.0"
   }
 }
