@@ -51,13 +51,7 @@ Next, create a `.babelrc` file in your project with the following:
 }
 ~~~
 
-Alternatively, if you're using Laravel Mix, you can put this in your `webpack.mix.js` file:
-
-~~~js
-mix.babelConfig({
-  plugins: ['@babel/plugin-syntax-dynamic-import'],
-})
-~~~
+If you're using Laravel Mix `^4.0.15`, you can skip the previous step.
 
 ## Initializing React
 
