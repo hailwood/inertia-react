@@ -35,7 +35,7 @@ declare namespace InertiaReact {
   type InertiaLink = React.FC<InertiaLinkProps>
 }
 
-declare module 'inertia-react' {
+declare module '@inertiajs/inertia-react' {
   export function usePage<
     PageProps extends Inertia.PageProps = Inertia.PageProps
   >(): PageProps
