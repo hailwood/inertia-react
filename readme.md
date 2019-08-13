@@ -7,7 +7,7 @@
 Install using NPM:
 
 ~~~sh
-npm install inertiajs/inertia-react --save
+npm install @inertiajs/inertia @inertiajs/inertia-react --save
 ~~~
 
 ## Configure server-side framework
@@ -64,14 +64,14 @@ mix.babelConfig({
 Next, update your main JavaScript file to boot your Inertia app. All we're doing here is initializing React with the base Inertia page component.
 
 ~~~jsx harmony
-import Inertia from 'inertia-react'
+import { InertiaApp } from '@inertiajs/inertia-react'
 import React from 'react'
 import { render } from 'react-dom'
 
 const app = document.getElementById('app')
 
 render(
-  <Inertia
+  <InertiaApp
     initialPage={JSON.parse(app.dataset.page)}
     resolveComponent={name => import(`@/Pages/${name}`).then(module => module.default)}
   />,
@@ -88,7 +88,7 @@ It's possible to also use Inertia without code splitting. This will generate one
 One way to do this is manually loading all your page components:
 
 ~~~jsx harmony
-import Inertia from 'inertia-react'
+import { InertiaApp } from '@inertiajs/inertia-react'
 import React from 'react'
 import { render } from 'react-dom'
 
@@ -102,7 +102,7 @@ const pages = {
 }
 
 render(
-  <Inertia
+  <InertiaApp
     initialPage={JSON.parse(app.dataset.page)}
     resolveComponent={name => pages[name]}
   />,
@@ -113,7 +113,7 @@ render(
 Another option is to use `required.context` to automatically register all your page components.
 
 ~~~jsx harmony
-import Inertia from 'inertia-react'
+import { InertiaApp } from '@inertiajs/inertia-react'
 import React from 'react'
 import { render } from 'react-dom'
 
@@ -122,7 +122,7 @@ const app = document.getElementById('app')
 const files = require.context('./', true, /\.js$/i)
 
 render(
-  <Inertia
+  <InertiaApp
     initialPage={JSON.parse(app.dataset.page)}
     resolveComponent={page => files(`./Pages/${page}.js`).default}
   />,
@@ -135,7 +135,7 @@ render(
 While not required, for most projects it makes sense to create a default site layout that your specific pages can extend. Save this to `/Shared/Layout.js`.
 
 ~~~jsx harmony
-import { InertiaLink } from 'inertia-react'
+import { InertiaLink } from '@inertiajs/inertia-react'
 import React from 'react'
 
 export default function Layout({ children }) {
@@ -176,7 +176,7 @@ export default function Welcome() {
 To create an Inertia link, use the `<InertiaLink>` component.
 
 ~~~jsx harmony
-import { InertiaLink } from 'inertia-react'
+import { InertiaLink } from '@inertiajs/inertia-react'
 import React from 'react'
 
 export default () => <InertiaLink href="/">Home</InertiaLink>
@@ -212,6 +212,8 @@ You can also preserve a page component's local state using the `preserveState` a
 In addition to clicking links, it's also very common to manually make Inertia visits. The following methods are available. Take note of the defaults.
 
 ~~~js
+import { Inertia } from '@inertiajs/inertia'
+
 // Make a visit
 Inertia.visit(url, { method: 'get', data: {}, replace: false, preserveState: false, preserveScroll: false })
 
@@ -243,7 +245,7 @@ Sometimes it's necessary to access the page data (props) from a non-page compone
 The easiest way to access page props is with our `usePage` hook.
 
 ~~~jsx harmony
-import { InertiaLink, usePage } from 'inertia-react'
+import { InertiaLink, usePage } from '@inertiajs/inertia-react'
 import React from 'react'
 
 export default function Layout({ children }) {
@@ -274,7 +276,7 @@ When navigating browser history, Inertia reloads pages using prop data cached in
 To mitigate this issue, you can use the `useRememberedState` hook to tell Inertia.js which local component state to cache.
 
 ~~~jsx harmony
-import { useRememberedState } from 'inertia-react'
+import { useRememberedState } from '@inertiajs/inertia-react'
 import React from 'react'
 
 export default function Profile() {
@@ -291,7 +293,7 @@ export default function Profile() {
 If your page contains multiple components using the remember functionality, you'll need to provide a unique key for each component. For example, `Users/Create`. If you have multiple instances of the same component on the page, be sure to include a unique identifier for each of those instances. For example, `Users/Edit:{id}`.
 
 ~~~jsx harmony
-import { useRememberedState } from 'inertia-react'
+import { useRememberedState } from '@inertiajs/inertia-react'
 import React from 'react'
 
 export default function Profile() {
