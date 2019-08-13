@@ -14,7 +14,7 @@
   "scripts": {
     "build": "npm run build:cjs && npm run build:umd",
     "build:cjs": "microbundle --format cjs",
-    "build:umd": "microbundle --format umd --name InertiaReact --globals react=React,inertia=Inertia",
+    "build:umd": "microbundle --format umd --name InertiaReact --globals react=React,@inertiajs/inertia=Inertia",
     "prepublishOnly": "npm run build"
   },
   "devDependencies": {
