@@ -3,7 +3,10 @@
   "version": "0.1.0",
   "license": "MIT",
   "description": "The React adapter for Inertia.js",
-  "author": "Jonathan Reinink",
+  "contributors": [
+    "Jonathan Reinink <jonathan@reinink.ca>",
+    "Sebastian De Deyne <sebastiandedeyne@gmail.com>"
+  ],
   "source": "src/index.js",
   "main": "dist/index.js",
   "unpkg": "dist/index.umd.js",
