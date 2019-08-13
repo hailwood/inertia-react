@@ -1,4 +1,4 @@
-import Inertia from 'inertia'
+import { Inertia } from 'inertia'
 import { createElement, useEffect, useState } from 'react'
 import PageContext from './PageContext'
 

@@ -1,8 +1,5 @@
-import App from './App'
-import InertiaLink from './Link'
-import usePage from './usePage'
-import usePageProps from './usePageProps'
-import useRememberedState from './useRememberedState'
-
-export default App
-export { InertiaLink, usePage, usePageProps, useRememberedState }
+export { default as InertiaApp } from './App'
+export { default as InertiaLink } from './Link'
+export { default as usePage } from './usePage'
+export { default as usePageProps } from './usePageProps'
+export { default as useRememberedState } from './useRememberedState'

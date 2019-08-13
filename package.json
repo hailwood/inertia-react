@@ -9,7 +9,10 @@
   "unpkg": "dist/index.umd.js",
   "typings": "index.d.ts",
   "scripts": {
-    "build": "microbundle --name InertiaReact --globals react=React,inertia=Inertia --format cjs,umd"
+    "build": "npm run build:cjs && npm run build:umd",
+    "build:cjs": "microbundle --format cjs",
+    "build:umd": "microbundle --format umd --name InertiaReact --globals react=React,inertia=Inertia",
+    "prepublishOnly": "npm run build"
   },
   "devDependencies": {
     "@types/react": "^16.8.0",
