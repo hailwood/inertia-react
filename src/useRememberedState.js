@@ -1,4 +1,4 @@
-import Inertia from 'inertia'
+import { Inertia } from 'inertia'
 import { useEffect, useState } from 'react'
 
 export default function useRememberedState(initialState, key) {

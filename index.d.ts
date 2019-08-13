@@ -49,7 +49,5 @@ declare module 'inertia-react' {
 
   export const InertiaLink: InertiaReact.InertiaLink
 
-  const _default: InertiaReact.App
-
-  export default _default
+  export const InertiaApp: InertiaReact.App
 }

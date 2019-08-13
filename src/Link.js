@@ -1,4 +1,4 @@
-import Inertia, { shouldIntercept } from 'inertia'
+import { Inertia, shouldIntercept } from 'inertia'
 import { createElement, useCallback } from 'react'
 
 const noop = () => undefined
