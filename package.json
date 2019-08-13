@@ -28,6 +28,6 @@
   },
   "peerDependencies": {
     "@inertiajs/inertia": "^0.1.0",
-    "react": "^16.9.0"
+    "react": "^16.8.0"
   }
 }
