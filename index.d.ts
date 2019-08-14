@@ -45,8 +45,6 @@ declare module '@inertiajs/inertia-react' {
     key?: string
   ): [RememberedState, React.Dispatch<React.SetStateAction<RememberedState>>]
 
-  export const Inertia: Inertia.Inertia
-
   export const InertiaLink: InertiaReact.InertiaLink
 
   export const InertiaApp: InertiaReact.App
