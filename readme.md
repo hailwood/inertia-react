@@ -298,3 +298,27 @@ export default function Profile() {
   // ...
 }
 ~~~
+
+## Transforming props client-side
+
+Sometimes it can be useful to transform the props client-side before they are passed to the page component. For example, you may have a collection of errors that you want to convert into a custom Error object. You can do this using the `transformProps` callback.
+
+~~~jsx harmony
+import { InertiaApp } from '@inertiajs/inertia-react'
+import React from 'react'
+import { render } from 'react-dom'
+
+const app = document.getElementById('app')
+
+render(
+  <InertiaApp
+    initialPage={JSON.parse(app.dataset.page)}
+    resolveComponent={name => import(`@/Pages/${name}`).then(module => module.default)}
+    transformProps={({ errors, ...props }) => ({
+      ...props,
+      errors: new Errors(errors),
+    })}
+  />,
+  app
+)
+~~~
