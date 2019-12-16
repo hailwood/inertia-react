@@ -34,8 +34,15 @@ export default function App({
     return createElement(PageContext.Provider, { value: page.props }, null)
   }
 
-  const renderChildren = children
-    || (({ Component, props, key }) => createElement(Component, { key, ...props }))
+  const renderChildren = children || (({ Component, props, key }) => {
+    const child = createElement(Component, { key, ...props })
+
+    if (Component.layout) {
+      return Component.layout(child)
+    }
+
+    return child
+  })
 
   return createElement(
     PageContext.Provider,
