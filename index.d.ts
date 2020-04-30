@@ -4,7 +4,7 @@ import * as React from 'react'
 type App<
   PagePropsBeforeTransform extends Inertia.PagePropsBeforeTransform = Inertia.PagePropsBeforeTransform,
   PageProps extends Inertia.PageProps = Inertia.PageProps
-  > = React.FunctionComponent<{
+> = React.FunctionComponent<{
   children?: (props: {
     Component: React.ComponentType
     key: React.Key
@@ -26,8 +26,8 @@ interface InertiaLinkProps extends React.HTMLAttributes<HTMLAnchorElement> {
       | React.MouseEvent<HTMLAnchorElement>
       | React.KeyboardEvent<HTMLAnchorElement>
   ) => void
-  preserveScroll?: boolean
-  preserveState?: boolean
+  preserveScroll?: boolean | ((props: Inertia.PageProps) => boolean)
+  preserveState?: boolean | ((props: Inertia.PageProps) => boolean)
   replace?: boolean
 }
 
