@@ -12,6 +12,7 @@ export default function InertiaLink({
   preserveScroll = false,
   preserveState = false,
   replace = false,
+  only = [],
   ...props
 }) {
   const visit = useCallback(event => {
@@ -26,9 +27,10 @@ export default function InertiaLink({
         preserveScroll,
         preserveState,
         replace,
+        only,
       })
     }
-  }, [data, href, method, onClick, preserveScroll, preserveState, replace])
+  }, [data, href, method, onClick, preserveScroll, preserveState, replace, only])
 
   return createElement('a', { ...props, href, onClick: visit }, children)
 }
