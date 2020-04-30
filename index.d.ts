@@ -4,7 +4,7 @@ import * as React from 'react'
 type App<
   PagePropsBeforeTransform extends Inertia.PagePropsBeforeTransform = Inertia.PagePropsBeforeTransform,
   PageProps extends Inertia.PageProps = Inertia.PageProps
-  > = React.FunctionComponent<{
+> = React.FunctionComponent<{
   children?: (props: {
     Component: React.ComponentType
     key: React.Key
