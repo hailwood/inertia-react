@@ -29,6 +29,7 @@ interface InertiaLinkProps extends React.HTMLAttributes<HTMLAnchorElement> {
   preserveScroll?: boolean | ((props: Inertia.PageProps) => boolean)
   preserveState?: boolean | ((props: Inertia.PageProps) => boolean)
   replace?: boolean
+  only?: string[]
 }
 
 type InertiaLink = React.FunctionComponent<InertiaLinkProps>
