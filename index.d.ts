@@ -26,8 +26,8 @@ interface InertiaLinkProps extends React.HTMLAttributes<HTMLAnchorElement> {
       | React.MouseEvent<HTMLAnchorElement>
       | React.KeyboardEvent<HTMLAnchorElement>
   ) => void
-  preserveScroll?: boolean
-  preserveState?: boolean
+  preserveScroll?: boolean | ((props: Inertia.PageProps) => boolean)
+  preserveState?: boolean | ((props: Inertia.PageProps) => boolean)
   replace?: boolean
 }
 
